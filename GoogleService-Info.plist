@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>288857184106-m8pjb8q5kp13004nvld45jsog4320j60.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.288857184106-m8pjb8q5kp13004nvld45jsog4320j60</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCB0l2yNDsjpB3ZRuiPlY99wlpee5D-ax4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>288857184106</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jove.SpoGo</string>
+	<key>PROJECT_ID</key>
+	<string>spogo-1575309829450</string>
+	<key>STORAGE_BUCKET</key>
+	<string>spogo-1575309829450.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:288857184106:ios:b61fbb4edcea6581763713</string>
+	<key>DATABASE_URL</key>
+	<string>https://spogo-1575309829450.firebaseio.com</string>
+</dict>
+</plist>
