@@ -96,17 +96,21 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
     func leaveViewController() {
         let isPresentingInAddMode = presentingViewController is UINavigationController
         if isPresentingInAddMode {
+            print("Attempt to dismiss")
             dismiss(animated: true, completion: nil)
         } else { //This is not working... it's taking me too far
-            for controller in self.navigationController!.viewControllers as Array {
-                if controller.isKind(of: GameDetailViewController.self) {
-                    self.navigationController!.popToViewController(controller, animated: true)
-                    break
+            print("does this shit happen?????")
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 2], animated: true);
+            //for controller in self.navigationController!.viewControllers as Array {
+            //    if controller.isKind(of: GameListViewController.self) {
+            //        self.navigationController!.popToViewController(controller, animated: true)
+            //        break
                 }
             }
             //navigationController!.popToRootViewController(animated: true)
-        }
-    }
+        
+    
     
     @IBAction func gameLocationPressed(_ sender: UITextField) {
         let autocompleteController = GMSAutocompleteViewController()

@@ -31,6 +31,7 @@ class GameListViewController: UIViewController {
         
         games.loadData {
             self.tableView.reloadData()
+    
         }
     }
     
@@ -65,6 +66,18 @@ class GameListViewController: UIViewController {
             if let selectedPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedPath, animated: true)
             }
+        }
+    }
+    
+    func leaveViewController() {
+        let isPresentingInAddMode = presentingViewController is UINavigationController
+        if isPresentingInAddMode {
+            print("Attempt to dismiss")
+            dismiss(animated: true, completion: nil)
+        } else { //This is not working... it's taking me too far
+            print("does this shit happen?????")
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 2], animated: true);
         }
     }
     
@@ -116,8 +129,6 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.gameCellTextView.text = game.gameSummary
         cell.gameCellLocation.text = game.location
         cell.gameCellIcon.image = UIImage(named: game.sport)
-        
-        
         game.getWeather {
             let roundedTemp = String(format: "%3.f", game.temp)
             cell.gameCellTemp?.text = "\(roundedTemp)°F"
@@ -141,32 +152,28 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            games.gamesArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            let db = Firestore.firestore()
-            db.collection("game").document(game.documentID).delete { err in
-                if let err = err {
-                    print("Unable to delete document, reason: \(err)")
+            print("&&&&&&&Recognizing delete")
+            //games.gamesArray.remove(at: indexPath.row)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            print("&&&&&&&This is good")
+            game.deleteData { (success) in
+                if success {
+                    print("**********\(self.game.documentID)")
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.leaveViewController()
                 } else {
-                    print("Data deleted successfully")
+                    print("Error: Delete unsuccessful")
                 }
             }
-
-    
-            //Firestore.firestore().setValue(nil, forKey: game.documentID )
-            
-//            Firestore.firestore().collection("games").document(game.documentID).delete { (error) in
-//                print("Deleted from Firebase")
-//            }
         }
     }
     
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let itemToMove = games.gamesArray[sourceIndexPath.row]
-        games.gamesArray.remove(at: sourceIndexPath.row)
-        games.gamesArray.insert(itemToMove, at: destinationIndexPath.row)
-    }
+
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let itemToMove = games.gamesArray[sourceIndexPath.row]
+//        games.gamesArray.remove(at: sourceIndexPath.row)
+//        games.gamesArray.insert(itemToMove, at: destinationIndexPath.row)
+//    }
 }
 
 extension GameListViewController: FUIAuthDelegate {

@@ -72,6 +72,7 @@ class Game: NSObject, MKAnnotation {
     }
     
     convenience init(dictionary: [String: Any]) {
+        //Want to add number of people needed, sportIcon, sport result from pickerView,
         let sport = dictionary["sport"] as! String? ?? ""
         let timeStamp = dictionary["date"] as! Timestamp
         let date = timeStamp.dateValue()
@@ -90,31 +91,31 @@ class Game: NSObject, MKAnnotation {
     }
     
     func getWeather(completed: @escaping () -> ()) {
-            print(latitude)
-            print(longitude)
-            let weatherURL = urlBase + urlAPIKey + "\(latitude),\(longitude)"
-            Alamofire.request(weatherURL).responseJSON { response in
-                print("Success!")
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    if let temperature = json["currently"]["temperature"].double {
-                        //self.temp = roundedTemp + "°F"
-                        self.temp = temperature
-                    } else {
-                        print("Could not return a temperature.")
-                    }
-                    if let icon = json["currently"]["icon"].string {
-                        self.weatherIcon = icon
-                    } else {
-                        print("Could not return an icon")
-                    }
-                case .failure(let error):
-                    print(error)
+        print(latitude)
+        print(longitude)
+        let weatherURL = urlBase + urlAPIKey + "\(latitude),\(longitude)"
+        Alamofire.request(weatherURL).responseJSON { response in
+            print("Success!")
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                if let temperature = json["currently"]["temperature"].double {
+                    //self.temp = roundedTemp + "°F"
+                    self.temp = temperature
+                } else {
+                    print("Could not return a temperature.")
                 }
-                completed()
+                if let icon = json["currently"]["icon"].string {
+                    self.weatherIcon = icon
+                } else {
+                    print("Could not return an icon")
+                }
+            case .failure(let error):
+                print(error)
             }
+            completed()
         }
+    }
     
     func saveData(completed: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
@@ -149,6 +150,20 @@ class Game: NSObject, MKAnnotation {
                     self.documentID = ref!.documentID
                     completed(true)
                 }
+            }
+        }
+    }
+    
+    func deleteData(completed: @escaping (Bool) -> ()) {
+        let db = Firestore.firestore()
+        //print("**********\(db.collection("games").document(self.documentID))")
+        db.collection("games").document(self.documentID).delete() { err in
+            if let err = err {
+                print("Unable to delete document, reason: \(err)")
+                completed(false)
+            } else {
+                print("Data deleted successfully")
+                completed(true)
             }
         }
     }

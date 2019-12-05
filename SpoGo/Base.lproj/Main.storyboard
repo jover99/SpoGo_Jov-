@@ -15,24 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0We-Bi-dMW">
-                                <rect key="frame" x="0.0" y="612" width="414" height="125"/>
-                                <color key="backgroundColor" red="0.80169045925140381" green="0.20484435558319092" blue="0.20389130711555481" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="QCr-zE-2tm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
-                                <state key="normal" title="Profile">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0HB-7a-fxT">
-                                <rect key="frame" x="0.0" y="487" width="414" height="125"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0HB-7a-fxT">
+                                <rect key="frame" x="0.0" y="598" width="414" height="183"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.32050257921218872" green="0.59087949991226196" blue="0.96866875886917114" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="aLq-cq-fK7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="111"/>
                                 <state key="normal" title="Play">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -40,41 +27,63 @@
                                     <segue destination="OLf-LH-Vas" kind="show" identifier="showGameDetailViewController" id="Fbp-pp-3EC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ih-Zy-aLF">
-                                <rect key="frame" x="0.0" y="737" width="414" height="125"/>
-                                <color key="backgroundColor" red="0.26664873957633972" green="0.59183871746063232" blue="0.25875219702720642" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="omL-CQ-Jqk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
-                                <state key="normal" title="Tips">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3BO-pa-0sc">
-                                <rect key="frame" x="0.0" y="88" width="414" height="402"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SpoGo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-9J-aVY">
+                                <rect key="frame" x="0.0" y="165" width="414" height="210"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="108"/>
+                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Basketball" translatesAutoresizingMaskIntoConstraints="NO" id="PRD-hE-U2K">
+                                <rect key="frame" x="310" y="401" width="59" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Football" translatesAutoresizingMaskIntoConstraints="NO" id="sy8-Ld-JYf">
+                                <rect key="frame" x="244" y="399" width="58" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Hockey" translatesAutoresizingMaskIntoConstraints="NO" id="Rof-jJ-eoJ">
+                                <rect key="frame" x="178" y="401" width="58" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Soccer" translatesAutoresizingMaskIntoConstraints="NO" id="5hK-tx-pdw">
+                                <rect key="frame" x="109" y="399" width="61" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Tennis" translatesAutoresizingMaskIntoConstraints="NO" id="b4K-jm-rig">
+                                <rect key="frame" x="44" y="400" width="57.601741802590553" height="56.573139270401434"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PingPong" translatesAutoresizingMaskIntoConstraints="NO" id="Ry1-Z1-5uB">
+                                <rect key="frame" x="311" y="469" width="59" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Run" translatesAutoresizingMaskIntoConstraints="NO" id="Fw3-vL-tTk">
+                                <rect key="frame" x="245" y="467" width="58" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Archery" translatesAutoresizingMaskIntoConstraints="NO" id="5PZ-is-BCL">
+                                <rect key="frame" x="179" y="469" width="58" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bicycle" translatesAutoresizingMaskIntoConstraints="NO" id="P4x-WI-3Qk">
+                                <rect key="frame" x="110" y="467" width="61" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Baseball" translatesAutoresizingMaskIntoConstraints="NO" id="gqg-cN-Yp3">
+                                <rect key="frame" x="45" y="468" width="57.601741802590553" height="56.573139270401434"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="0HB-7a-fxT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4JQ-kl-i8B"/>
-                            <constraint firstItem="5ih-Zy-aLF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="A2Y-Hq-hdv"/>
-                            <constraint firstItem="0We-Bi-dMW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EUX-QJ-Bmc"/>
-                            <constraint firstItem="0We-Bi-dMW" firstAttribute="top" secondItem="0HB-7a-fxT" secondAttribute="bottom" id="L8T-YL-XB2"/>
-                            <constraint firstItem="5ih-Zy-aLF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Lbu-yk-9Ha"/>
-                            <constraint firstItem="5ih-Zy-aLF" firstAttribute="top" secondItem="0We-Bi-dMW" secondAttribute="bottom" id="NsD-ET-WhR"/>
-                            <constraint firstItem="5ih-Zy-aLF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bYA-Fl-ziv"/>
-                            <constraint firstItem="0HB-7a-fxT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hd1-Qf-sfG"/>
-                            <constraint firstItem="0We-Bi-dMW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mgH-FZ-Rlt"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="vJe-qb-x9a"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="920"/>
+            <point key="canvasLocation" x="1856.521739130435" y="919.41964285714278"/>
         </scene>
         <!--Game Detail View Controller-->
         <scene sceneID="Rc6-Fd-gxp">
@@ -201,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlW-OY-jsZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6147.826086956522" y="166.74107142857142"/>
+            <point key="canvasLocation" x="6254" y="919"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HJA-Vb-dwL">
@@ -269,7 +278,7 @@
                                                     <rect key="frame" x="353" y="11" width="45" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Avg Skill: Intermediate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KE-hh-KX4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Skill Level: Intermediate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KE-hh-KX4">
                                                     <rect key="frame" x="91" y="79" width="265" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
@@ -320,7 +329,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ba-3Y-vRf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4084.057971014493" y="166.74107142857142"/>
+            <point key="canvasLocation" x="4014" y="919"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Jyl-sN-5hA">
@@ -406,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vA-xz-T7I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3174" y="919"/>
+            <point key="canvasLocation" x="2196" y="96"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="SGj-Jg-3HD">
@@ -475,22 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="255-ey-Dna" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="-313"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="3ev-OI-tBZ">
-            <objects>
-                <viewController id="r7y-J6-oOl" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3lu-v7-AQz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="jz9-ck-WgP"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a1V-cf-E8W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3174" y="1621"/>
+            <point key="canvasLocation" x="1396" y="97"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S0k-3s-5ZF">
@@ -508,7 +502,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hTL-6a-4L9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5105.7971014492759" y="-205.58035714285714"/>
+            <point key="canvasLocation" x="5155" y="602"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2xT-0H-lNF">
@@ -527,11 +521,20 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ugq-Ol-xeq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3174" y="167"/>
+            <point key="canvasLocation" x="2978" y="919"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Archery" width="384" height="384"/>
+        <image name="Baseball" width="384" height="384"/>
         <image name="Basketball" width="384" height="384"/>
+        <image name="Bicycle" width="384" height="384"/>
+        <image name="Football" width="384" height="384"/>
+        <image name="Hockey" width="384" height="384"/>
+        <image name="PingPong" width="384" height="384"/>
+        <image name="Run" width="384" height="384"/>
+        <image name="Soccer" width="384" height="384"/>
+        <image name="Tennis" width="384" height="384"/>
         <image name="clear-day" width="103" height="109"/>
         <image name="profile_0" width="112" height="98"/>
         <image name="profile_1" width="70" height="106"/>
@@ -539,6 +542,6 @@
         <image name="profile_3" width="116" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QJk-w6-B1a"/>
+        <segue reference="uJd-kd-N1t"/>
     </inferredMetricsTieBreakers>
 </document>
