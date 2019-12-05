@@ -75,7 +75,6 @@ class GameListViewController: UIViewController {
             print("Attempt to dismiss")
             dismiss(animated: true, completion: nil)
         } else { //This is not working... it's taking me too far
-            print("does this shit happen?????")
             let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
             self.navigationController!.popToViewController(viewControllers[viewControllers.count - 2], animated: true);
         }
