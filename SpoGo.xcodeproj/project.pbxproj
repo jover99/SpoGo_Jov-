@@ -15,7 +15,6 @@
 		8D9D6886239597C100E0B84D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D6885239597C100E0B84D /* Game.swift */; };
 		8D9D688823959B0900E0B84D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D688723959B0900E0B84D /* GoogleService-Info.plist */; };
 		8D9D688A2395A0F000E0B84D /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D68892395A0F000E0B84D /* Games.swift */; };
-		8D9D688C2396140A00E0B84D /* WeatherDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D688B2396140A00E0B84D /* WeatherDetail.swift */; };
 		8D9D688E239616EA00E0B84D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D688D239616EA00E0B84D /* Constants.swift */; };
 		8DBF13E823940E3100C6E823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBF13E723940E3100C6E823 /* AppDelegate.swift */; };
 		8DBF13EA23940E3100C6E823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBF13E923940E3100C6E823 /* SceneDelegate.swift */; };
@@ -35,7 +34,6 @@
 		8D9D6885239597C100E0B84D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8D9D688723959B0900E0B84D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8D9D68892395A0F000E0B84D /* Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Games.swift; sourceTree = "<group>"; };
-		8D9D688B2396140A00E0B84D /* WeatherDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetail.swift; sourceTree = "<group>"; };
 		8D9D688D239616EA00E0B84D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8DBF13E423940E3100C6E823 /* SpoGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpoGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DBF13E723940E3100C6E823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				8D9D68892395A0F000E0B84D /* Games.swift */,
 				8D9D6885239597C100E0B84D /* Game.swift */,
 				8D9D68832395845A00E0B84D /* GameDetail.swift */,
-				8D9D688B2396140A00E0B84D /* WeatherDetail.swift */,
 				8DBF13EB23940E3100C6E823 /* ViewController.swift */,
 				8D86AFAC23947F92007ABD04 /* GameListViewController.swift */,
 				8D9D6881239572BE00E0B84D /* GameTableViewCell.swift */,
@@ -254,7 +251,6 @@
 			files = (
 				8DBF13EC23940E3100C6E823 /* ViewController.swift in Sources */,
 				8D9D688E239616EA00E0B84D /* Constants.swift in Sources */,
-				8D9D688C2396140A00E0B84D /* WeatherDetail.swift in Sources */,
 				8D9D688023947C6600E0B84D /* GameDetailViewController.swift in Sources */,
 				8D86AFAD23947F92007ABD04 /* GameListViewController.swift in Sources */,
 				8D9D688A2395A0F000E0B84D /* Games.swift in Sources */,

@@ -13,7 +13,7 @@ import MapKit
 import Alamofire
 import SwiftyJSON
 
-class Game {
+class Game: NSObject, MKAnnotation {
     var sport: String
     var coordinate: CLLocationCoordinate2D
     var address: String
@@ -67,7 +67,7 @@ class Game {
         self.documentID = documentID
     }
     
-    convenience init() {
+    convenience override init() {
         self.init(sport: "", date: Date(), sportIcon: "", location: "", address: "", coordinate: CLLocationCoordinate2D(), temp: 0.0, gameSummary: "", weatherIcon: "", averageSkill: 0.0, postingUserID: "", documentID: "")
     }
     
@@ -99,7 +99,6 @@ class Game {
                 case .success(let value):
                     let json = JSON(value)
                     if let temperature = json["currently"]["temperature"].double {
-                        let roundedTemp = String(format: "%3.f", temperature)
                         //self.temp = roundedTemp + "°F"
                         self.temp = temperature
                     } else {
@@ -116,7 +115,6 @@ class Game {
                 completed()
             }
         }
-    
     
     func saveData(completed: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()

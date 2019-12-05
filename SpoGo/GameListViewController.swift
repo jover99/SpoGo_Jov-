@@ -12,37 +12,32 @@ import FirebaseUI
 import GoogleSignIn
 
 class GameListViewController: UIViewController {
-
     
     @IBOutlet weak var addBarButton: UIBarButtonItem!
     @IBOutlet weak var editBarButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
-    //var gamesArray = ["Football","Hockey","Basketball","Soccer"]
     var games = Games()
-    var locationsArray = [WeatherDetail]()
-    
+    var game = Game()
     var sportName = ""
-    
     var authUI: FUIAuth!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         authUI = FUIAuth.defaultAuthUI()
-        // You need to adopt a FUIAuthDelegate protocol to receive callback
         authUI.delegate = self
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
-        var newLocation = WeatherDetail(coordinates: "")
-        locationsArray.append(newLocation)
         
         games.loadData {
             self.tableView.reloadData()
         }
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        games.loadData {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +47,7 @@ class GameListViewController: UIViewController {
     
     func signIn() { //Sign out UI at 36:34 on 9.3
         let providers: [FUIAuthProvider] = [
-          FUIGoogleAuth()
+            FUIGoogleAuth()
         ]
         if authUI.auth?.currentUser == nil {
             self.authUI.providers = providers
@@ -85,29 +80,29 @@ class GameListViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindFromSaveGameDetail(segue: UIStoryboardSegue) {
-        let source = segue.source as! GameDetailViewController
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            games.gamesArray[selectedIndexPath.row] = source.game
-            games.gamesArray[selectedIndexPath.row].saveData { (success) in
-                if !success {
-                    print("It didn't work")
-                }
-                self.tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-            }
-        } else {
-            let newIndexPath = IndexPath(row: games.gamesArray.count, section: 0)
-            games.gamesArray.append(source.game)
-            games.gamesArray[newIndexPath.row].saveData { (success) in
-                if !success {
-                    // alert
-                    print("Save didn't work")
-                }
-                self.tableView.insertRows(at: [newIndexPath], with: .bottom)
-                self.tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-            }
-        }
-    }
+    //    @IBAction func unwindFromSaveGameDetail(segue: UIStoryboardSegue) {
+    //        let source = segue.source as! GameDetailViewController
+    //        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+    //            games.gamesArray[selectedIndexPath.row] = source.game
+    //            games.gamesArray[selectedIndexPath.row].saveData { (success) in
+    //                if !success {
+    //                    print("It didn't work")
+    //                }
+    //                self.tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+    //            }
+    //        } else {
+    //            let newIndexPath = IndexPath(row: games.gamesArray.count, section: 0)
+    //            games.gamesArray.append(source.game)
+    //            games.gamesArray[newIndexPath.row].saveData { (success) in
+    //                if !success {
+    //                    // alert
+    //                    print("Save didn't work")
+    //                }
+    //                self.tableView.insertRows(at: [newIndexPath], with: .bottom)
+    //                self.tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+    //            }
+    //        }
+    //    }
 }
 
 extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -121,7 +116,14 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.gameCellTextView.text = game.gameSummary
         cell.gameCellLocation.text = game.location
         cell.gameCellIcon.image = UIImage(named: game.sport)
-        cell.gameCellTemp?.text = String(game.temp)
+        
+        
+        game.getWeather {
+            let roundedTemp = String(format: "%3.f", game.temp)
+            cell.gameCellTemp?.text = "\(roundedTemp)°F"
+            cell.gameCellWeatherIcon.image = UIImage(named: "\(game.weatherIcon)")
+        }
+        
         
         if game.skillLevel == 0 {
             cell.gameCellAverageSkill.text = "Skill Level: Beginner"
@@ -141,8 +143,24 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             games.gamesArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            let db = Firestore.firestore()
+            db.collection("game").document(game.documentID).delete { err in
+                if let err = err {
+                    print("Unable to delete document, reason: \(err)")
+                } else {
+                    print("Data deleted successfully")
+                }
+            }
+
+    
+            //Firestore.firestore().setValue(nil, forKey: game.documentID )
+            
+//            Firestore.firestore().collection("games").document(game.documentID).delete { (error) in
+//                print("Deleted from Firebase")
+//            }
         }
     }
+    
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let itemToMove = games.gamesArray[sourceIndexPath.row]
@@ -155,11 +173,11 @@ extension GameListViewController: FUIAuthDelegate {
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
-      if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-        return true
-      }
-      // other URL handling goes here.
-      return false
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
+        }
+        // other URL handling goes here.
+        return false
     }
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
@@ -167,7 +185,6 @@ extension GameListViewController: FUIAuthDelegate {
             print("*** We signed in with the user \(user.email ?? "unknown email")")
         }
     }
-    
 }
 
 

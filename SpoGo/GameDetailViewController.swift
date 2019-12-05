@@ -25,6 +25,8 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
     var game: Game!
     var locationManager: CLLocationManager!
     let regionDistance: CLLocationDistance = 750 //750 meters or about a half mile
+    // let currentLocation: CLLocation!
+    let currentLocation = CLLocation()
     var level: String = ""
     
     override func viewDidLoad() {
@@ -37,22 +39,23 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
             game = Game()
         }
         
+        let region = MKCoordinateRegion(center: self.game.coordinate, latitudinalMeters: self.regionDistance, longitudinalMeters: self.regionDistance)
+        self.mapView.setRegion(region, animated: true)
+        
         self.loadCurrentLocation {
             self.updateUI()
         }
     }
     
     func updateUI() {
-        let region = MKCoordinateRegion(center: self.game.coordinate, latitudinalMeters: self.regionDistance, longitudinalMeters: self.regionDistance)
-        self.mapView.setRegion(region, animated: true)
-        
         let i = self.sportsArray.firstIndex(of: self.game.sport) ?? 0
         self.sportPickerView.selectRow(i, inComponent: 0, animated: false)
         self.datePicker.date = self.game.date
         self.descriptionTextView.text = self.game.gameSummary
         self.levelSegmentedControl.selectedSegmentIndex = Int(self.game.skillLevel)
-        self.numberOfPeopleTextField.text = self.game.location
-        // self.gameLocationTextField.text = Need to make location a string
+        //self.numberOfPeopleTextField.text =
+        self.gameLocationTextField.text = self.game.location
+        updateMap()
     }
     
     func loadCurrentLocation(completed: @escaping ()-> ()) {
@@ -61,14 +64,47 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
         completed()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "unwindFromSave" {
-            game.location = gameLocationTextField.text ?? ""
-            // game.sportIcon
-            // game.temp
-            // game.weatherIcon
-            game.gameSummary = descriptionTextView.text ?? ""
-            game.skillLevel = Double(levelSegmentedControl.selectedSegmentIndex)
+    func updateMap() {
+        print("\(game.latitude)😎😎")
+        print("*** Just updated the map")
+        print("location = \(game.location)")
+        print("coordinate = \(game.coordinate)")
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(game)
+        mapView.setCenter(game.coordinate, animated: true)
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "unwindFromSave" {
+//            game.saveData { (success) in //This doesn't seem to be right
+//                self.game.location = self.gameLocationTextField.text ?? ""
+////                self.game.getWeather {
+////                    <#code#>
+////                }
+//                // game.sportIcon
+//                // game.temp
+//                // game.weatherIcon
+//                self.game.gameSummary = self.descriptionTextView.text ?? ""
+//                self.game.skillLevel = Double(self.levelSegmentedControl.selectedSegmentIndex)
+//            }
+//        }
+//    }
+    
+    // func showAlert
+    
+    //MARK:- NEED TO GET THIS TO WORK PROPERLY... ISSUE IS SHOWING INITIAL VIEW CONTROLLER
+    func leaveViewController() {
+        let isPresentingInAddMode = presentingViewController is UINavigationController
+        if isPresentingInAddMode {
+            dismiss(animated: true, completion: nil)
+        } else { //This is not working... it's taking me too far
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: GameDetailViewController.self) {
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+            //navigationController!.popToRootViewController(animated: true)
         }
     }
     
@@ -78,13 +114,27 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
         present(autocompleteController, animated: true, completion: nil)
     }
     
-    @IBAction func cancelBarButtonPressed(_ sender: UIBarButtonItem) {
-        let isPresentingInAddMode = presentingViewController is UINavigationController
-        if isPresentingInAddMode {
-            dismiss(animated: true, completion: nil)
-        } else {
-            navigationController!.popViewController(animated: true)
+    func updateUserInterface() {
+        self.game.location = self.gameLocationTextField.text!
+        self.game.gameSummary = self.descriptionTextView.text!
+        //Insert field for sport type
+    }
+    
+    
+    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        updateUserInterface()
+        game.saveData { success in
+            if success {
+                self.leaveViewController()
+                print("Success!")
+            } else {
+                print("*** ERROR: Couldn't leave this view controller because data wasn't saved.")
+            }
         }
+    }
+    
+    @IBAction func cancelBarButtonPressed(_ sender: UIBarButtonItem) {
+        leaveViewController()
     }
     
     @IBAction func datePickerChanged(_ sender: Any) {
@@ -106,7 +156,6 @@ extension GameDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // use new variable in game to track what's selected
         game.sport = sportsArray[row]
     }
 }
@@ -115,12 +164,13 @@ extension GameDetailViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        game.location = place.name ?? "unknown place name"
+        game.address = place.formattedAddress ?? "address unknown"
         gameLocationTextField.text = place.name
+        game.coordinate = place.coordinate
         print(place.coordinate)
         self.mapView.setCenter(place.coordinate, animated: true)
+        updateUI()
         dismiss(animated: true, completion: nil)
     }
     
@@ -148,7 +198,7 @@ extension GameDetailViewController: CLLocationManagerDelegate {
     
     func getLocation() {
         locationManager = CLLocationManager()
-        locationManager.delegate = self //Can't do this in viewDidLoad until create location manager
+        locationManager.delegate = self
     }
     
     func handleLocationAuthorizationStatus(status: CLAuthorizationStatus) {
@@ -169,8 +219,9 @@ extension GameDetailViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Current location:")
-        print(locations.last!.coordinate)
+        guard game.location == "" else {
+            return
+        }
         game.coordinate = locations.last!.coordinate
         print("Did update locations")
         updateUI()

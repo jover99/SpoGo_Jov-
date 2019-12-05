@@ -8,6 +8,7 @@
 // Either do - exercises, motivational quotes, or weather
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 

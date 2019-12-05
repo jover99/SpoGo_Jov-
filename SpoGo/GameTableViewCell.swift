@@ -17,6 +17,7 @@ class GameTableViewCell: UITableViewCell {
     @IBOutlet weak var gameCellWeatherIcon: UIImageView!
     @IBOutlet weak var gameCellAverageSkill: UILabel!
     
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
