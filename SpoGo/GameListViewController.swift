@@ -31,7 +31,6 @@ class GameListViewController: UIViewController {
         
         games.loadData {
             self.tableView.reloadData()
-    
         }
     }
     
@@ -55,7 +54,6 @@ class GameListViewController: UIViewController {
             present(authUI.authViewController(), animated: true, completion: nil)
         }
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showGameDetail" {
@@ -133,8 +131,6 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.gameCellTemp?.text = "\(roundedTemp)°F"
             cell.gameCellWeatherIcon.image = UIImage(named: "\(game.weatherIcon)")
         }
-        
-        
         if game.skillLevel == 0 {
             cell.gameCellAverageSkill.text = "Skill Level: Beginner"
         } else if game.skillLevel == 1 {
@@ -151,15 +147,17 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("&&&&&&&Recognizing delete")
-            //games.gamesArray.remove(at: indexPath.row)
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-            print("&&&&&&&This is good")
-            game.deleteData { (success) in
+            //print("&&&&&&& Recognizing delete")
+            //games.gamesArray.remove(at: indexPath.row) //Deletes value from array
+            //tableView.deleteRows(at: [indexPath], with: .fade) //Deletes value from tableView
+            //print("^^^^^^^ This is good")
+            let game = games.gamesArray[indexPath.row]
+            
+            game.deleteData() { (success) in
                 if success {
-                    print("**********\(self.game.documentID)")
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    self.leaveViewController()
+                    //print("**********\(self.game.documentID)")
+                    //tableView.deleteRows(at: [indexPath], with: .fade)
+                    
                 } else {
                     print("Error: Delete unsuccessful")
                 }
@@ -167,7 +165,6 @@ extension GameListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-
 //    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 //        let itemToMove = games.gamesArray[sourceIndexPath.row]
 //        games.gamesArray.remove(at: sourceIndexPath.row)
