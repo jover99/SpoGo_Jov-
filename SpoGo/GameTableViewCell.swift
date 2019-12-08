@@ -9,7 +9,7 @@
 import UIKit
 
 class GameTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var gameCellIcon: UIImageView!
     @IBOutlet weak var gameCellLocation: UILabel!
     @IBOutlet weak var gameCellTemp: UILabel!
@@ -20,7 +20,7 @@ class GameTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
-
+    
 }

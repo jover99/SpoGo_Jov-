@@ -17,6 +17,7 @@ class Game: NSObject, MKAnnotation {
     var sport: String
     var coordinate: CLLocationCoordinate2D
     var address: String
+    var numPeopleNeeded: Int
     var date: Date
     var sportIcon: String
     var location: String
@@ -48,14 +49,15 @@ class Game: NSObject, MKAnnotation {
     }
     
     var dictionary: [String: Any] {
-        return ["sport": sport, "date": date, "sportIcon": sportIcon, "location": location, "temp": temp, "gameSummary": gameSummary, "address": address, "longitude": longitude, "latitude": latitude, "weatherIcon": weatherIcon, "averageSkill": skillLevel, "postingUserID": postingUserID]
+        return ["sport": sport, "date": date, "sportIcon": sportIcon, "location": location, "temp": temp, "gameSummary": gameSummary, "address": address, "numPeopleNeeded": numPeopleNeeded, "longitude": longitude, "latitude": latitude, "weatherIcon": weatherIcon, "averageSkill": skillLevel, "postingUserID": postingUserID]
     }
     
-    init(sport: String, date: Date, sportIcon: String, location: String, address: String, coordinate: CLLocationCoordinate2D, temp: Double, gameSummary: String, weatherIcon: String, averageSkill: Double, postingUserID: String, documentID: String) { //Figure out why we need this
+    init(sport: String, date: Date, sportIcon: String, location: String, address: String, numPeopleNeeded: Int, coordinate: CLLocationCoordinate2D, temp: Double, gameSummary: String, weatherIcon: String, averageSkill: Double, postingUserID: String, documentID: String) {
         
         self.sport = sport
         self.date = date
         self.address = address
+        self.numPeopleNeeded = numPeopleNeeded
         self.coordinate = coordinate
         self.sportIcon = sportIcon
         self.location = location
@@ -68,7 +70,7 @@ class Game: NSObject, MKAnnotation {
     }
     
     convenience override init() {
-        self.init(sport: "", date: Date(), sportIcon: "", location: "", address: "", coordinate: CLLocationCoordinate2D(), temp: 0.0, gameSummary: "", weatherIcon: "", averageSkill: 0.0, postingUserID: "", documentID: "")
+        self.init(sport: "", date: Date(), sportIcon: "", location: "", address: "", numPeopleNeeded: 0, coordinate: CLLocationCoordinate2D(), temp: 0.0, gameSummary: "", weatherIcon: "", averageSkill: 0.0, postingUserID: "", documentID: "")
     }
     
     convenience init(dictionary: [String: Any]) {
@@ -80,6 +82,7 @@ class Game: NSObject, MKAnnotation {
         let location = dictionary["location"] as! String? ?? ""
         let temp = dictionary["temp"] as! Double? ?? 0.0
         let address = dictionary["address"] as! String? ?? ""
+        let numPeopleNeeded = dictionary["numPeopleNeeded"] as! Int? ?? 0
         let latitude = dictionary["latitude"] as! CLLocationDegrees? ?? 0.0
         let longitude = dictionary["longitude"] as! CLLocationDegrees? ?? 0.0
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -87,7 +90,7 @@ class Game: NSObject, MKAnnotation {
         let weatherIcon = dictionary["weatherIcon"] as! String? ?? ""
         let averageSkill = dictionary["averageSkill"] as! Double? ?? 0.0
         let postingUserID = dictionary["postingUserID"] as! String? ?? ""
-        self.init(sport: sport, date: date, sportIcon: sportIcon, location: location, address: address, coordinate: coordinate, temp: temp, gameSummary: gameSummary, weatherIcon: weatherIcon, averageSkill: averageSkill, postingUserID: postingUserID, documentID: "")
+        self.init(sport: sport, date: date, sportIcon: sportIcon, location: location, address: address, numPeopleNeeded: numPeopleNeeded, coordinate: coordinate, temp: temp, gameSummary: gameSummary, weatherIcon: weatherIcon, averageSkill: averageSkill, postingUserID: postingUserID, documentID: "")
     }
     
     func getWeather(completed: @escaping () -> ()) {
