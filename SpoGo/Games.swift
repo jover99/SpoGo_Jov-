@@ -26,13 +26,11 @@ class Games {
             self.gamesArray = []
             // there are querySnapshot!.documents.count documents in the spots snapshot
             for document in querySnapshot!.documents {
-                let game = Game(dictionary: document.data()) //Will load a dictionary up for us
+                let game = Game(dictionary: document.data())
                 game.documentID = document.documentID
                 self.gamesArray.append(game)
             }
             completed()
         }
     }
-    
-    
 }

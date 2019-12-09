@@ -11,7 +11,7 @@ import GooglePlaces
 import MapKit
 import CoreLocation
 
-class GameDetailViewController: UIViewController, MKMapViewDelegate {
+class GameDetailViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
     
     @IBOutlet weak var numberOfPeopleTextField: UITextField!
     @IBOutlet weak var sportPickerView: UIPickerView!
@@ -35,6 +35,7 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
         self.sportPickerView.delegate = self
         self.sportPickerView.dataSource = self
         self.mapView.delegate = self
+        descriptionTextView.delegate = self
 
         if game == nil {
             game = Game()
@@ -89,10 +90,12 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @IBAction func gameLocationPressed(_ sender: UITextField) {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-        present(autocompleteController, animated: true, completion: nil)
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
     func updateFromUserInterface() {
@@ -100,6 +103,12 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
         self.game.gameSummary = self.descriptionTextView.text!
         self.game.skillLevel = Double(self.levelSegmentedControl.selectedSegmentIndex)
         self.game.numPeopleNeeded = Int(self.numberOfPeopleTextField.text!)!
+    }
+    
+    @IBAction func gameLocationPressed(_ sender: UITextField) {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        present(autocompleteController, animated: true, completion: nil)
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
@@ -120,6 +129,10 @@ class GameDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func datePickerChanged(_ sender: Any) {
         game.date = datePicker.date
+    }
+    
+    @IBAction func numberOfPeopleTextField(_ sender: UITextField) {
+        numberOfPeopleTextField.resignFirstResponder()
     }
 }
 

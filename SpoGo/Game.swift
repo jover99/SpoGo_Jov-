@@ -159,7 +159,6 @@ class Game: NSObject, MKAnnotation {
     
     func deleteData(completed: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        //print("**********\(db.collection("games").document(self.documentID))")
         db.collection("games").document(documentID).delete { (error) in
             if let error = error {
                 print("Unable to delete document, reason: \(error)")
